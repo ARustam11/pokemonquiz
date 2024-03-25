@@ -1,4 +1,4 @@
-// Get DOM elements
+// DOM elements
 const resultElement = document.getElementById("result");
 const pokemonImageElement = document.getElementById("pokemonImage");
 const optionsContainer = document.getElementById("options");
@@ -7,14 +7,16 @@ const totalCount = document.getElementById("totalCount");
 const mainContainer = document.getElementsByClassName("container");
 const loadingContainer = document.getElementById("loadingContainer");
 
-// Initialize  variables
+
+// Main Variables
 
 let usedPokemonIds = [];
 let count = 0;
 let points = 0;
+// let wrongAnswers = 0;
 let showLoading = false;
 
-// Function to fetch one Pokemon with an ID !!!async
+// Async Function to fetch one Pokemon with an ID 
 
 async function fetchPokemonById(id) {
     showLoading = true;
@@ -27,15 +29,18 @@ async function fetchPokemonById(id) {
 // Function to load question with options
 
 async function loadQuestionWithOptions() {
+    //make image white again
+    // pokemonImageElement.classList.remove("appear");
 
     if (showLoading) {
         hidePuzzleWindow();
         showLoadingWindow();
     }
+    
 
     let pokemonId = getRandomPokemonId();
 
-    // Now we check if the current question has been used
+    // Check if the current question has been used
     while (usedPokemonIds.includes(pokemonId)) {
         pokemonId = getRandomPokemonId();
     }
@@ -87,6 +92,12 @@ async function loadQuestionWithOptions() {
         optionsContainer.appendChild(button);
     });
 
+    // ENDGAME
+    // if (points === 10 || wrongAnswers === 5) {
+    //     endGame();
+    //     return;
+    // }
+    //
 
     if (!showLoading) {
         hideLoadingWindow();
@@ -98,7 +109,7 @@ async function loadQuestionWithOptions() {
 //Creating checkAnswer function
 
 function checkAnswer(isCorrect, event) {
-    // Checks if any button is already selected, if falsy then no element and returns null
+    // Checks if any button is already selected, if false then no element and returns null
     const selectedButton = document.querySelector(".selected");
 
     if (selectedButton) {
@@ -109,18 +120,26 @@ function checkAnswer(isCorrect, event) {
     event.target.classList.add("selected");
     count++;
     totalCount.textContent = count;
-
+    
 
     if (isCorrect) {
         //call display function
         displayResult("Correct answer!");
-        
         points++;
         pointsElement.textContent = points;
         event.target.classList.add("correct");
+        // pokemonImageElement.classList.add("appear"); //makes image colored
+        // if (points === 10) {
+        //     endGame();
+        // }
     } else {
         displayResult("Wrong answer... ");
         event.target.classList.add("wrong");
+        // pokemonImageElement.classList.add("appear"); // makes image colored
+        // wrongAnswers++;
+        // if (wrongAnswers === 5) {
+        //     endGame();
+        // }
     }
 
     // Load the next question with a 1s delay for user to read the result.
@@ -133,9 +152,21 @@ function checkAnswer(isCorrect, event) {
 }
     
 
+//ENDGAME
+// function endGame() {
+//     if (points === 10) {
+//         displayResult("Congratulations! You reached 10 points.");
+//     } else {
+//         displayResult("Game over. You made 5 wrong answers.");
+//     }
+// }   
+
+
 loadQuestionWithOptions();
 
+
 // --- UTILITY FUNCTIONS ---
+ 
 
 
 //Function to randomize the pokemon ID

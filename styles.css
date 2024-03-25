@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Lalezar&family=Oswald:wght@700&family=Rammetto+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
-    --white-color: #fff;
-    --button-correct: #5aae76;
-    --button-wrong: #e13e3e;
-    --button-hover: #aaa;
+    --white-color: hsl(0, 0%, 100%);
+    --button-correct: hsl(140, 34%, 52%);
+    --button-wrong: hsl(0, 73%, 56%);
+    --button-hover: hsl(0, 0%, 67%);
 }
 
 body {
@@ -16,7 +16,7 @@ body {
     min-height: 100vh;
     margin: 0;
     font-family: "Poppins", sans-serif;
-    background: linear-gradient(135deg, #3b4cca 0%, #ff3535 100%);
+    background: linear-gradient(135deg, #969cce 0%, #712c2c 100%);
     color: var(--white-color);
 }
 
@@ -29,7 +29,7 @@ body {
 
 .header {
     margin: 0;
-    font-family: "Rammetto One", sans-serif;
+    font-family: "Press Start 2P", sans-serif;
     font-size: 24px;
     font-weight: 400;
     height: 100px;
@@ -38,6 +38,7 @@ body {
 #pokemonImage {
     height: 200px;
     max-width: 100%;
+    /* filter: brightness(100); */
 }
 
 .options-container {
@@ -109,3 +110,6 @@ button.wrong {
     align-content: center;
 }
 
+/* #pokemonImage.appear {
+    filter: none;
+} */
